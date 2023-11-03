@@ -31,11 +31,13 @@ export class UserService {
   update(id: number, updateUserDto: UpdateUserDto) {
     
     this.userRepository.update(id, updateUserDto);
-    return this.findOne(id);
+    return this.userRepository.findOne({ where: { id } });
+    
   }
 
-  async remove(id: number) : Promise<string> {
+  async remove(id: number)  {
     await this.userRepository.delete(id);
+
   return "deleted successfully";
   }
 }
